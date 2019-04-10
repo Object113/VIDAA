@@ -247,100 +247,116 @@ export function clippingLAA(device_selection_data, mesh, scene, camera, renderer
 }
 function calculate_diameters(contour) {
     var contour_coordinates = contour[0].contour;
+    console.log("Calculating diameters...")
+    if (contour[0].contour) {
+        scene.add(contour[0].mesh);
 
-    var all_distances = [];
-    for (var i = 0; i < contour_coordinates.length; i++) {
-        for (var j = 1; j < contour_coordinates.length; j++) {
-            var distance = Math.sqrt((Math.pow(contour_coordinates[i].x - contour_coordinates[j].x, 2)) + (Math.pow(contour_coordinates[i].y - contour_coordinates[j].y, 2)) + Math.pow(contour_coordinates[i].z - contour_coordinates[j].z, 2));
-            var vector = [distance, i, j];
-            all_distances.push(vector);
+        var contour_coordinates = contour[0].contour;
+
+        var perimeter = 0;
+        for (var i = 1; i < contour_coordinates.length; i++) {
+
+            perimeter = perimeter + Math.sqrt((Math.pow(contour_coordinates[i - 1].x - contour_coordinates[i].x, 2)) + (Math.pow(contour_coordinates[i - 1].y - contour_coordinates[i].y, 2)) + Math.pow(contour_coordinates[i - 1].z - contour_coordinates[i].z, 2));
+
         }
-    }
-    var D1;
-    for (var i = 1; i < all_distances.length; i++) {
-        if (all_distances[i][0] > all_distances[i - 1][0]) {
-            D1 = all_distances[i];
-        }
-    }
-
-    var A = new THREE.Vector3(contour_coordinates[D1[1]].x, contour_coordinates[D1[1]].y, contour_coordinates[D1[1]].z)
-    var B = new THREE.Vector3(contour_coordinates[D1[2]].x, contour_coordinates[D1[2]].y, contour_coordinates[D1[2]].z)
-
-    var line = new THREE.Line3(A, B);
-    var line_D1 = new THREE.LineSegments(line_D1, new THREE.LineBasicMaterial({
-        color: "red"
-    }));
-    var midpoint = new THREE.Vector3;
-    midpoint.x = (contour_coordinates[D1[1]].x + contour_coordinates[D1[2]].x) / 2;
-    midpoint.y = (contour_coordinates[D1[1]].y + contour_coordinates[D1[2]].y) / 2;
-    midpoint.z = (contour_coordinates[D1[1]].z + contour_coordinates[D1[2]].z) / 2;
-    line_D1.translateX(midpoint.x);
-    line_D1.translateY(midpoint.y);
-    line_D1.translateZ(midpoint.z);
-
-    // Minimum radius calculation
-    var min_distances = [];
-    for (var i = 0; i < contour_coordinates.length; i++) {
-        var distance = Math.sqrt((Math.pow(contour_coordinates[i].x - midpoint.x, 2)) + (Math.pow(contour_coordinates[i].y - midpoint.y, 2)) + Math.pow(contour_coordinates[i].z - midpoint.z, 2));
-        var vector = [distance, i];
-        min_distances.push(vector);
-    }
-
-    var R_min;
-    for (var i = 1; i < min_distances.length; i++) {
-        if (i !== D1[1] && i !== D1[2]) {
-            if (min_distances[i][0] < min_distances[i - 1][0]) {
-                R_min = min_distances[i];
-            } else {
-                R_min = min_distances[i - 1];
+        var all_distances = [];
+        var distances = [];
+        for (var i = 0; i < contour_coordinates.length; i++) {
+            for (var j = 0; j < contour_coordinates.length; j++) {
+                var distance = Math.sqrt((Math.pow(contour_coordinates[i].x - contour_coordinates[j].x, 2)) + (Math.pow(contour_coordinates[i].y - contour_coordinates[j].y, 2)) + Math.pow(contour_coordinates[i].z - contour_coordinates[j].z, 2));
+                var vector = [distance, i, j];
+                all_distances.push(vector);
+                distances.push(distance);
             }
         }
-    }
 
-    // Minimum diameter calculation from the minimum radius
-    // Calculate vector from midpoint to the end of R_min
-    var vecA = new THREE.Vector3();
-    vecA.x = midpoint.x - contour_coordinates[R_min[1]].x;
-    vecA.y = midpoint.y - contour_coordinates[R_min[1]].y;
-    vecA.z = midpoint.z - contour_coordinates[R_min[1]].z;
-    vecA.normalize();
-    var module_vecA = Math.sqrt(Math.pow(vecA.x,2)+Math.pow(vecA.y,2)+Math.pow(vecA.z,2));
-    // Calculate vectors from all points to the midpoint
-    var all_vectors = [];
-    var complementarian_vector;
-    for (var i = 0; i < contour_coordinates.length; i++) {
-        var vecB = new THREE.Vector3();
-        vecB.x = midpoint.x - contour_coordinates[i].x;
-        vecB.y = midpoint.y - contour_coordinates[i].y;
-        vecB.z = midpoint.z - contour_coordinates[i].z;
-        vecB.normalize();
-        all_vectors.push(vecB);
-        // Calculate angles from vecA to vecB
-        var product = vecA.x * vecB.x + vecA.y * vecB.y + vecA.z * vecB.z;
-        var module_vecB = Math.sqrt(Math.pow(vecB.x,2)+Math.pow(vecB.y,2)+Math.pow(vecB.z,2));
-        var angle = Math.acos(product/(module_vecA*module_vecB));
-        // See if the angle is near to 180º
-        if (angle >= Math.PI - 0.05 && angle <= Math.PI + 0.05){
-            complementarian_vector = i;
-        }
+        const arrMax = arr => arr.indexOf(Math.max(...arr));
         
+        var D1_index = arrMax(distances);
+        var D1 = all_distances[D1_index];
+        var A = new THREE.Vector3(contour_coordinates[D1[1]].x, contour_coordinates[D1[1]].y, contour_coordinates[D1[1]].z)
+        var B = new THREE.Vector3(contour_coordinates[D1[2]].x, contour_coordinates[D1[2]].y, contour_coordinates[D1[2]].z)
+
+        var line = new THREE.Geometry();
+        line.vertices.push(A);
+        line.vertices.push(B);
+        var line_D1 = new THREE.LineSegments(line, new THREE.LineBasicMaterial({
+            color: "red"
+        }));
+        //scene.add(line_D1);
+
+        var midpoint = new THREE.Vector3;
+        midpoint.x = (contour_coordinates[D1[1]].x + contour_coordinates[D1[2]].x) / 2;
+        midpoint.y = (contour_coordinates[D1[1]].y + contour_coordinates[D1[2]].y) / 2;
+        midpoint.z = (contour_coordinates[D1[1]].z + contour_coordinates[D1[2]].z) / 2;
+        line_D1.translateX(midpoint.x);
+        line_D1.translateY(midpoint.y);
+        line_D1.translateZ(midpoint.z);
+
+        // Minimum radius calculation
+        var min_distances = [];
+        var minimum = [];
+        for (var i = 0; i < contour_coordinates.length; i++) {
+            var distance = Math.sqrt((Math.pow(contour_coordinates[i].x - midpoint.x, 2)) + (Math.pow(contour_coordinates[i].y - midpoint.y, 2)) + Math.pow(contour_coordinates[i].z - midpoint.z, 2));
+            var vector = [distance, i];
+            min_distances.push(vector);
+            minimum.push(distance)
+        }
+        const arrMin = arr => arr.indexOf(Math.min(...arr));
+        var R_min_index = arrMin(minimum);
+        var R_min = min_distances[R_min_index];
+
+
+        // Minimum diameter calculation from the minimum radius
+        // Calculate vector from midpoint to the end of R_min
+        var vecA = new THREE.Vector3();
+        vecA.x = midpoint.x - contour_coordinates[R_min_index].x;
+        vecA.y = midpoint.y - contour_coordinates[R_min_index].y;
+        vecA.z = midpoint.z - contour_coordinates[R_min_index].z;
+        vecA.normalize();
+
+        var module_vecA = Math.sqrt(Math.pow(vecA.x, 2) + Math.pow(vecA.y, 2) + Math.pow(vecA.z, 2));
+        // Calculate vectors from all points to the midpoint
+        var all_vectors = [];
+        var complementarian_vector;
+        for (var i = 0; i < contour_coordinates.length; i++) {
+            var vecB = new THREE.Vector3();
+            vecB.x = midpoint.x - contour_coordinates[i].x;
+            vecB.y = midpoint.y - contour_coordinates[i].y;
+            vecB.z = midpoint.z - contour_coordinates[i].z;
+            vecB.normalize();
+            all_vectors.push(vecB);
+            // Calculate angles from vecA to vecB
+            var product = vecA.x * vecB.x + vecA.y * vecB.y + vecA.z * vecB.z;
+            var module_vecB = Math.sqrt(Math.pow(vecB.x, 2) + Math.pow(vecB.y, 2) + Math.pow(vecB.z, 2));
+            var angle = Math.acos(product / (module_vecA * module_vecB));
+            // See if the angle is near to 180º
+            if (angle >= Math.PI - 0.1 && angle <= Math.PI + 0.1) {
+                complementarian_vector = i;
+            }
+
+        }
+        // Calculate minimal distance
+        var CD_x = contour_coordinates[R_min_index].x - contour_coordinates[complementarian_vector].x;
+        var CD_y = contour_coordinates[R_min_index].y - contour_coordinates[complementarian_vector].y;
+        var CD_z = contour_coordinates[R_min_index].z - contour_coordinates[complementarian_vector].z;
+
+        // Distance
+        var D2 = Math.sqrt(Math.pow(CD_x, 2) + Math.pow(CD_y, 2) + Math.pow(CD_z, 2));
+
+        var D2_vec = [D2, R_min[1], complementarian_vector];
+        // Export data
+        var data = {};
+        data["D1"] = D1;
+        data["D2"] = D2_vec;
+        data["line_D1"] = line_D1;
+        data["R_min"] = R_min;
+        data["perimeter"] = perimeter;
+
+        return data;
     }
-    // Calculate minimal distance
-    var CD_x = contour_coordinates[R_min[1]].x-contour_coordinates[complementarian_vector].x;
-    var CD_y = contour_coordinates[R_min[1]].y-contour_coordinates[complementarian_vector].y;
-    var CD_z = contour_coordinates[R_min[1]].z-contour_coordinates[complementarian_vector].z;
-
-    // Distance
-    var D2 = Math.sqrt(Math.pow(CD_x,2)+Math.pow(CD_y,2)+Math.pow(CD_z,2));
-
-    var D2_vec = [D2, R_min[1], complementarian_vector];
-    // Export data
-    var data = {};
-    data["D1"] = D1;
-    data["D2"] = D2_vec;
-    data["line_D1"] = line_D1;
-    data["R_min"] = R_min;
-    return data;
+  
+    
 }
 export function intersection_calculus(mesh, meshLAA, device_selection_data, all_vectors, scene, boxcenterLA) {
     var ostium_point = device_selection_data.first_point;
