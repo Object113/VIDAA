@@ -4,7 +4,7 @@ Virtual Implantation and Device selection in left Atrial Appendages, VIDAA, is a
 
 The workflow is described in Aguado AM, Olivares AL, Yagüe C, Silva E, Nuñez-García M, Fernandez-Quilez Á, Mill J, Genua I, Arzamendi D, De Potter T, Freixa X and Camara O (2019) *In silico Optimization of Left Atrial Appendage Occluder Implantation Using Interactive and Modeling Tools*. Front. Physiol. 10:237. doi: 10.3389/fphys.2019.00237. Please cite this reference when using VIDAA platform. [Link to the article](https://www.frontiersin.org/articles/10.3389/fphys.2019.00237/full?&utm_source=Email_to_authors_&utm_medium=Email&utm_content=T1_11.5e1_author&utm_campaign=Email_publication&field=&journalName=Frontiers_in_Physiology&id=431074)
 
-Original Developers: Ainhoa Marina Aguado Martin, Carlos Yagüe Méndez. Contributors: Andy L. Olivares, Oscar Camara, Xavier Freixa, Maria del Pilar García, Ibai Genua Gamio, Álvaro Férnandez-Quilez, Jordi Mill.
+Original Developers: Ainhoa Marina Aguado Martin, Carlos Yagüe Méndez. Contributors: Andy L. Olivares, Oscar Camara, Xavier Freixa, Maria del Pilar García, Ibai Genua Gamio, Álvaro Fernandez-Quilez, Jordi Mill.
 
 ## VIDAA Demo
 Watch the video below to know how the VIDAA platform works.
