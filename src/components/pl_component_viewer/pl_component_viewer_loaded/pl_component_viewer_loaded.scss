@@ -1,0 +1,136 @@
+/*
+# Rocket viewer is (c) BCNMedTech, UNIVERSITAT POMPEU FABRA
+#
+# Rocket viewer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Rocket viewer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Authors:
+# Carlos Yagüe Méndez
+# María del Pilar García
+# Daniele Pezzatini
+# Contributors: 
+# Sergio Sánchez Martínez
+*/
+
+
+.pl-component-viewer-loaded-message{
+    padding-bottom: 100px;
+    
+    h4{
+        color:white;
+    }
+    h2{
+        color:whitesmoke;
+        margin-top: 50px;
+    }
+    
+}
+
+
+a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+.previous {  
+    
+    background-color: $color-3;
+    color:whitesmoke;
+    position: absolute;
+    left: 10px;
+    bottom: 20px;    
+}
+
+.next {
+    background-color: $color-3;
+    color:whitesmoke;
+    position: absolute;
+    right: 10px;  
+    bottom: 20px;    
+}
+
+.Clipping_button{
+    background-color: $color-3;
+    color: white;
+    position: absolute;
+    right: 20px;  
+    bottom: 10px;   
+}
+
+.Implantation_button{
+    background-color: $color-3;
+    color: white;
+    position: absolute;
+    right: 20px;  
+    bottom: 10px;  
+    
+}
+.Implantation_button:hover:not(.active) {
+    background-color: $color-2;
+    color: white;
+}
+.Clipping_button:hover:not(.active) {
+    background-color: $color-2;
+    color: white;
+}
+.Data_view:hover:not(.active) {
+    background-color: $color-2;
+    color: white;
+}
+.next:hover:not(.active) {
+    background-color: $color-2;
+    color: white;
+}
+.previous:hover:not(.active) {
+    background-color: $color-2;
+    color: white;
+}
+.left{
+
+        height: 100%;
+        position: relative;
+        width: 100%;
+        margin-top: 50px;
+        margin-bottom: 20px;
+
+    
+}
+.middle {
+   
+    height: 100%;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.right {
+
+    height: 100%;
+    position: relative;
+    width: 100%;
+    margin-bottom: 100px;
+    text-align: justify;
+}
+.Data_view{
+    background-color: $color-3;
+    color: white;
+    position: absolute;
+    right: 20px;  
+    bottom: 10px;  
+}
+ol.f {
+    list-style-type: decimal;
+    text-align: justify;
+}
+
+
+

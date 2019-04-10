@@ -1,0 +1,13 @@
+@import './pl_component_viewer_empty/pl_component_viewer_empty.scss';
+@import './pl_component_viewer_loaded/pl_component_viewer_loaded.scss';
+@import './pl_component_viewer_mesh/pl_component_viewer_mesh.scss';
+
+.pl-component-viewer{
+    background-color: $color-6;
+    color:white;
+    h3{
+        color:$color-3;
+        font-size: 24px
+    }
+  
+}

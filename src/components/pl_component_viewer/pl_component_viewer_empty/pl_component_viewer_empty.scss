@@ -1,0 +1,82 @@
+/*
+# Rocket viewer is (c) BCNMedTech, UNIVERSITAT POMPEU FABRA
+#
+# Rocket viewer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# Rocket viewer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Authors:
+# Carlos Yagüe Méndez
+# María del Pilar García
+# Daniele Pezzatini
+# Contributors: 
+# Sergio Sánchez Martínez
+*/
+
+$rkt-main-color:#a58cd8;
+$rkt-main-color-hover:#a58cd8;
+$rkt-second-color:rgb(218, 215, 215);
+$form-elements-background-color:rgba(128, 128, 128, 0.31);
+$form-elements-background-color-hover:rgba(128, 128, 128, 0.64);
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {fill: $rkt-second-color}
+    100% {fill:$rkt-main-color}
+    100%   {fill: $rkt-second-color}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {fill: $rkt-second-color}
+    50% {fill:$rkt-main-color};
+    100%   {fill: $rkt-second-color}
+}
+
+.rkt-viewer-empty-dragbox-icon {
+    .box{
+        //fill:rgb(218, 215, 215);
+        fill:$rkt-main-color;
+        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-iteration-count: 30;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-iteration-count: 30;
+    }
+    
+    .arrow{
+        fill:$rkt-main-color;
+        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-iteration-count: 30;
+        animation-name: example;
+        animation-duration: 4s;
+        animation-iteration-count: 30;
+    }
+    
+    .head{
+        fill:$rkt-second-color;
+    }
+}
+
+.pl-component-viewer-empty-message{
+    padding-bottom: 100px;
+    
+    h4{
+        color:white;
+    }
+
+    .icon{
+        fill:$color-1;
+    }
+}

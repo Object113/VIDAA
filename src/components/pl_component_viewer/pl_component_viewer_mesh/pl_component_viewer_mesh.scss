@@ -1,0 +1,115 @@
+@import './../pl_component_viewer_clipping/pl_component_viewer_clipping.scss';
+@import './../pl_component_viewer_LAAO_implantation/pl_component_viewer_LAAO_implantation.scss';
+@import './../pl_component_centreline/pl_component_centreline.scss';
+
+.pl-component-viewer-mesh{
+
+    .body{
+        
+        .body-left{
+            
+
+            .body-left-table{
+
+                background-color: black;
+            }
+
+            .body-left-laa{
+
+                background-color: black;
+            }
+        }
+
+        .body-right{
+            background-color: red;
+        }
+    }
+
+    .toolbar{
+       // background-color: $color-6;
+
+        
+        a {
+            display: block;
+            color: white;
+            text-align: center;       
+        }
+        
+        a:hover:not(.active) {
+            background-color: $color-6;
+
+        }
+        
+        .active {
+            background-color: $color-3;
+            
+        }
+        
+    }
+}
+#container-viewer{
+    display: block;
+    width: 100%;
+   
+}
+.container-gui-menu{
+               
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    right: 0px;
+    background-color: transparent;
+    input[type=text]{
+        font-size: 10pt;
+        padding-top: 2px;
+        margin-bottom: 4px;
+        padding-right: 2px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        height: 17px;
+    }
+    .close-button{
+visibility: hidden;
+}
+}
+#container-viewer{
+    display: block;
+    width: 100%;
+}
+#LAA_CL-container-viewer{
+    display: block;
+    width: 100%;
+}
+#Intersection-container-viewer{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#my_canvas{
+    z-index: 1;
+    position: absolute;
+    left: 10px;
+    right: 0;
+    top: 10px;
+
+    height: 200px;
+    width:300px;
+
+    background-color: transparent;
+    color: white;
+    padding: 0;
+    border:1px solid $color-1;
+
+    &:hover{
+        border: 1px solid $color-3;
+    }
+}
+
+.menu-canvas {
+    position: absolute;
+    top: 0px;
+    left: 5%;
+    height: 500px;
+    width: 500px;
+    z-index: 99;
+}

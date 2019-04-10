@@ -1,0 +1,56 @@
+.pl-component-viewer-LAAO-implantation{
+
+  
+        .body{
+            .container-gui-menu{
+               
+                position: absolute;
+                top: 0px;
+                z-index: 2;
+                right: 0px;
+                background-color: transparent;
+                input[type=text]{
+                    font-size: 8pt;
+                    padding-top: 2px;
+                    margin-bottom: 4px;
+                    padding-right: 2px;
+                    padding-bottom: 2px;
+                    padding-left: 2px;
+                    height: 17px;
+                }
+                .close-button{
+            visibility: hidden;
+        }
+            }
+    
+        }
+        .toolbar{
+         //   background-color: $color-6;
+    
+            
+            a {
+                display: block;
+                color: white;
+                text-align: center;       
+            }
+            
+            a:hover:not(.active) {
+                background-color: $color-6;
+    
+            }
+            
+            .active {
+                background-color: $color-3;
+                
+            }
+            
+        }
+        }
+        
+      
+    #container-viewer{
+        display: block;
+        width: 100%;
+       
+    }
+    
